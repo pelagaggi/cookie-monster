@@ -58,3 +58,29 @@ test('pickBest prefers the highest score, then the first', () => {
   assert.equal(m.pickBest(['Reject', 'Settings']), -1);
   assert.equal(m.pickBest([]), -1);
 });
+
+test('accept words must be whole words', () => {
+  for (const label of ['Halloween Cookies', 'User Agreement', 'Accepted cards', 'Allowance']) {
+    assert.equal(m.scoreLabel(label), 0, label);
+  }
+  assert.equal(m.scoreLabel('Accept & close'), 2);
+  assert.equal(m.scoreLabel('Accept cookies'), 2);
+});
+
+test('negated and partial accepts in other phrasings score 0', () => {
+  for (const label of ['Continuer sans accepter', 'Continue without accepting', 'Não aceito',
+    'No acepto', 'Nicht akzeptieren', 'Nur notwendige akzeptieren', 'Accept selected', 'Not now']) {
+    assert.equal(m.scoreLabel(label), 0, label);
+  }
+});
+
+test('labels that buy, pay, subscribe or sign in score 0', () => {
+  for (const label of ['Agree & pay', 'Agree and subscribe', 'Accept and sign up', 'Agree & place order', 'Accept and log in']) {
+    assert.equal(m.scoreLabel(label), 0, label);
+  }
+});
+
+test('mentionsCookies is true only for cookie wording', () => {
+  assert.equal(m.mentionsCookies('We use COOKIES on this site'), true);
+  assert.equal(m.mentionsCookies('I consent to receive marketing emails'), false);
+});

@@ -2,6 +2,7 @@
   "manifest_version": 3,
   "name": "Cookie Monster",
   "version": "1.0.0",
+  "minimum_chrome_version": "120",
   "description": "When a cookie banner shows up, a hungry blue monster eats the accept button for you.",
   "permissions": ["storage", "tts", "offscreen"],
   "background": {

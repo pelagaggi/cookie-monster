@@ -88,6 +88,20 @@ Inside a candidate, consider visible `button`, `a`, `[role="button"]`, and
   - 1: `got it`, `ok`, `okay`, `i understand`, `entendi`, `continue`. These
     must be the whole label, so "More about cookies" does not match `ok`.
 
+Rules added after code review, to stop misfires on ordinary pages:
+
+- Accept patterns in tiers 3 and 2 match whole words only, so "allow" does not
+  match "Halloween" and "agree" does not match "Agreement".
+- Further reject patterns cover negations and partial accepts (`without`,
+  `not `, `later`, `selected`, `sans`, `não`, `no `, `sin `, `nicht`, `ohne`,
+  `nur`, `notwendig`, `auswahl`) and anything transactional (`pay`, `buy`,
+  `order`, `purchase`, `checkout`, `subscribe`, `sign`, `log in`, `login`).
+- A tier-1 label is only trusted when the banner text contains `cookie`.
+- A container holding a text-entry field (text, email, password, tel, number,
+  search, textarea, select) is a form, not a banner.
+- During the show, the click is cancelled if the button is no longer visible
+  or the user presses anywhere inside the banner.
+
 The highest-scoring element wins; ties go to the first in document order. If
 nothing scores, there is no detection.
 
@@ -154,6 +168,10 @@ Rules:
   - `banner-pt.html`: Portuguese banner.
   - `no-banner.html`: ordinary page; nothing must happen.
   - `cookie-recipe.html`: article about baking cookies with a sticky header;
+    nothing must happen.
+  - `login-dialog.html`: sign-in dialog mentioning a cookie policy; nothing
+    must happen.
+  - `newsletter-modal.html`: marketing-consent modal with an OK button;
     nothing must happen.
 
 ## Out of scope

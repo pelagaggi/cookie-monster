@@ -2,7 +2,7 @@
 (function (root) {
   'use strict';
 
-  const { character } = root.CookieMonster;
+  const { character, detector } = root.CookieMonster;
 
   const WIDTH = 180;
   const HEIGHT = 198;
@@ -174,10 +174,17 @@
   }
 
   // Resolves true when the show completed and hooks.onFinish ran, false when
-  // the button vanished part-way and nothing was clicked.
-  async function play(button, hooks) {
+  // nothing was clicked: the button vanished part-way, or the user answered
+  // the banner themselves.
+  async function play({ banner, button }, hooks) {
     const savedMask = saveMask(button);
     const { host, stage, monster } = buildOverlay();
+    let userTookOver = false;
+    const onPointerDown = (event) => {
+      if (event.isTrusted && event.composedPath().includes(banner)) userTookOver = true;
+    };
+    const stillOurs = () => !userTookOver && button.isConnected && detector.isVisible(button);
+    document.addEventListener('pointerdown', onPointerDown, true);
     try {
       const rect = button.getBoundingClientRect();
       const center = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
@@ -189,7 +196,7 @@
         easing: 'cubic-bezier(.3, 1.5, .6, 1)',
         fill: 'forwards',
       }).finished;
-      if (!button.isConnected) return false;
+      if (!stillOurs()) return false;
 
       monster.classList.add('eating');
       hooks.onEatStart();
@@ -197,14 +204,14 @@
       const buttonColor = /^(transparent|rgba\(0, 0, 0, 0\))$/.test(background) ? COOKIE_BROWN : background;
       const bites = [];
       for (let i = 0; i < CHOMPS; i++) {
-        if (!button.isConnected) return false;
+        if (!stillOurs()) return false;
         bites.push(nextBite(rect, i));
         applyBites(button, bites, i === CHOMPS - 1);
         spawnCrumbs(stage, center, buttonColor);
         if (i % 2 === 0) spawnShout(stage, center, character.shouts[(i / 2) % character.shouts.length]);
         await sleep(CHOMP_MS);
       }
-      if (!button.isConnected) return false;
+      if (!stillOurs()) return false;
 
       hooks.onFinish();
       monster.classList.remove('eating');
@@ -214,6 +221,7 @@
       ).finished;
       return true;
     } finally {
+      document.removeEventListener('pointerdown', onPointerDown, true);
       host.remove();
       restoreMask(button, savedMask);
     }

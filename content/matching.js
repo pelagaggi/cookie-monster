@@ -15,6 +15,10 @@
     'preferences', 'manage', 'customi', 'options', 'learn more', 'policy',
     'rejeitar', 'recusar', 'rechazar', 'refuser', 'ablehnen', 'configur',
     'einstellungen', 'paramètres', 'do not', "don't", 'disallow', 'disagree', 'only',
+    'without', 'not ', 'later', 'selected', 'selection', 'sans', 'não', 'no ', 'sin ',
+    'nicht', 'ohne', 'nur', 'notwendig', 'auswahl',
+    // Never click anything that buys, subscribes or signs in.
+    'pay', 'buy', 'order', 'purchase', 'checkout', 'subscribe', 'sign', 'log in', 'login',
   ];
 
   const ACCEPT_ALL_PATTERNS = [
@@ -43,6 +47,20 @@
     return patterns.some((pattern) => text.includes(pattern));
   }
 
+  // Matches the patterns only as whole words, so "allow" does not match
+  // "Halloween" and "agree" does not match "Agreement".
+  function wholeWordMatcher(patterns) {
+    const escaped = patterns.map((pattern) => pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    return new RegExp(`(?<!\\p{L})(?:${escaped.join('|')})(?!\\p{L})`, 'u');
+  }
+
+  const ACCEPT_ALL = wholeWordMatcher(ACCEPT_ALL_PATTERNS);
+  const ACCEPT = wholeWordMatcher(ACCEPT_PATTERNS);
+
+  function mentionsCookies(text) {
+    return normalize(text).includes('cookie');
+  }
+
   function isBannerText(text) {
     const normalized = normalize(text);
     return (
@@ -56,8 +74,8 @@
     const label = normalize(text);
     if (!label || label.length > MAX_LABEL) return 0;
     if (includesAny(label, REJECT_PATTERNS)) return 0;
-    if (includesAny(label, ACCEPT_ALL_PATTERNS)) return 3;
-    if (includesAny(label, ACCEPT_PATTERNS)) return 2;
+    if (ACCEPT_ALL.test(label)) return 3;
+    if (ACCEPT.test(label)) return 2;
     const bare = label.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '');
     return ACKNOWLEDGE_LABELS.includes(bare) ? 1 : 0;
   }
@@ -75,7 +93,7 @@
     return best;
   }
 
-  const api = { normalize, isBannerText, scoreLabel, pickBest };
+  const api = { normalize, isBannerText, mentionsCookies, scoreLabel, pickBest };
   root.CookieMonster = root.CookieMonster || {};
   root.CookieMonster.matching = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;

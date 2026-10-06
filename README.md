@@ -29,6 +29,11 @@ without the show.
 ## Limits
 
 - Banners inside iframes or closed shadow roots are not detected.
+- Banners that contain a text field or dropdown (for example a language
+  picker) are skipped, because that is how login and checkout forms are told
+  apart from banners.
+- If you click inside the banner during the show, the monster backs off and
+  nothing is accepted.
 - It only ever accepts. It does not reject cookies or choose options.
 - In a background tab the show waits until you look at the tab.
 
@@ -47,7 +52,8 @@ cd test/fixtures && python3 -m http.server 8765
 ```
 
 Then open `http://localhost:8765/` and pick a page. The four `banner-*` pages
-should get eaten; `no-banner.html` and `cookie-recipe.html` should be left alone.
+should get eaten; the other pages (no banner, a cookie recipe, a login dialog,
+a newsletter modal) should be left alone.
 
 ## Changing the character
 

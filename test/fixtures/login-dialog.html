@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>login dialog</title>
+<style>
+  body { font: 16px/1.5 system-ui, sans-serif; margin: 40px; }
+  [role="dialog"] { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); width: 320px; padding: 24px; background: #fff; border: 1px solid #ccc; border-radius: 8px; }
+  input, button { display: block; width: 100%; box-sizing: border-box; margin: 8px 0; padding: 10px; font: inherit; }
+</style>
+<h1>Login dialog</h1>
+<p>A sign-in dialog that mentions the cookie policy. Nothing should happen.</p>
+<div role="dialog">
+  <form onsubmit="document.title = 'submitted'; return false">
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <button>Continue</button>
+    <button type="button" onclick="document.title = 'submitted'">I agree</button>
+    <small>By continuing you agree to our Terms and Cookie Policy.</small>
+  </form>
+</div>
+</html>

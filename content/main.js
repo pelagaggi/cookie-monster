@@ -16,13 +16,14 @@
     const { enabled, sound } = await chrome.storage.sync.get({ enabled: true, sound: true });
     if (!enabled) return;
 
-    detector.watch(async ({ button }) => {
+    detector.watch(async (hit) => {
+      const { button } = hit;
       try {
         if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
           button.click();
           return;
         }
-        await monster.play(button, {
+        await monster.play(hit, {
           onEatStart: () => sound && requestSound(),
           onFinish: () => button.click(),
         });

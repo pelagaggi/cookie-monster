@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>newsletter modal</title>
+<style>
+  body { font: 16px/1.5 system-ui, sans-serif; margin: 40px; }
+  .modal { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); width: 320px; padding: 24px; background: #fff; border: 1px solid #ccc; border-radius: 8px; }
+  button { padding: 10px 18px; margin: 8px 8px 0 0; font: inherit; }
+</style>
+<h1>Newsletter modal</h1>
+<p>A marketing-consent modal with no cookie wording. Nothing should happen.</p>
+<div class="modal">
+  <p>I consent to receive marketing emails.</p>
+  <button onclick="document.title = 'subscribed'">OK</button>
+  <button onclick="document.title = 'dismissed'">No thanks</button>
+</div>
+</html>
