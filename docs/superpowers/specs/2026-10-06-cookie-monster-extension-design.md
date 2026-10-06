@@ -61,8 +61,10 @@ An element qualifies as a banner when all of these hold:
 2. It is positioned as an overlay: computed `position` is `fixed` or `sticky`,
    or it has a `z-index` of 100 or more, or it is a `<dialog open>` or has
    `role="dialog"` / `aria-modal="true"`.
-3. Its text contains a consent keyword: `cookie`, `cookies`, `consent`, `gdpr`,
-   `privacy`, `privacidade`, `privacidad`, `datenschutz`, `confidentialité`.
+3. Its text contains a consent keyword: `cookie`, `consent`, `gdpr`,
+   `consentimento`, `consentimiento`, `einwilligung`. Privacy wording alone
+   does not qualify, so sign-up and login dialogs that mention a privacy
+   policy are not treated as banners.
 4. Its text is at most 2,000 characters. This keeps articles and whole pages
    from qualifying.
 
