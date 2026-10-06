@@ -78,13 +78,15 @@ Inside a candidate, consider visible `button`, `a`, `[role="button"]`, and
 - Reject patterns exclude an element: `reject`, `decline`, `deny`, `refuse`,
   `necessary`, `essential`, `settings`, `preferences`, `manage`, `customi`,
   `options`, `learn more`, `policy`, `rejeitar`, `recusar`, `rechazar`,
-  `refuser`, `ablehnen`, `configur`, `einstellungen`, `paramètres`.
+  `refuser`, `ablehnen`, `configur`, `einstellungen`, `paramètres`, `do not`,
+  `don't`, `disallow`, `disagree`, `only`.
 - Accept patterns, scored:
   - 3: `accept all`, `allow all`, `agree to all`, `aceitar tudo`,
     `aceitar todos`, `aceptar todo`, `tout accepter`, `alle akzeptieren`
   - 2: `accept`, `agree`, `allow`, `aceitar`, `aceito`, `aceptar`, `acepto`,
     `accepter`, `j'accepte`, `akzeptieren`, `zustimmen`, `concordo`
-  - 1: `got it`, `ok`, `okay`, `i understand`, `entendi`, `continue`
+  - 1: `got it`, `ok`, `okay`, `i understand`, `entendi`, `continue`. These
+    must be the whole label, so "More about cookies" does not match `ok`.
 
 The highest-scoring element wins; ties go to the first in document order. If
 nothing scores, there is no detection.
@@ -109,9 +111,9 @@ affect the monster and the monster cannot block the page.
    bite to the real button using a CSS `mask-image` of radial gradients set as
    an inline style, so chunks visibly disappear. Crumbs fly from the button and
    "OM NOM NOM" comic text pops up. Sound plays here.
-3. **Click and exit (about 0.6 s).** The mask is removed, the real button is
-   clicked with `element.click()`, and the monster leaves the screen. The
-   overlay is removed from the DOM.
+3. **Click and exit (about 0.6 s).** The real button is clicked with
+   `element.click()` while still masked, and the monster leaves the screen.
+   The overlay is then removed and the button's original style restored.
 
 Rules:
 
