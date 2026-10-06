@@ -7,9 +7,11 @@ charges onto the screen, eats the accept button, and accepts for you.
 
 ## Install
 
-1. Open `chrome://extensions`.
-2. Turn on **Developer mode** (top right).
-3. Click **Load unpacked** and pick this folder.
+1. Download [cookie-monster.zip](https://github.com/pelagaggi/cookie-monster/releases/latest/download/cookie-monster.zip)
+   and unzip it. (Or clone this repo.)
+2. Open `chrome://extensions`.
+3. Turn on **Developer mode** (top right).
+4. Click **Load unpacked** and pick the unzipped `cookie-monster` folder.
 
 The toolbar popup has a toggle that turns the monster off. Changes apply to
 pages you load next.
