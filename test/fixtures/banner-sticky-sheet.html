@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>sticky sheet banner</title>
+<style>
+  body { font: 16px/1.5 system-ui, sans-serif; margin: 0; }
+  .page { position: relative; }
+  .shop { padding: 24px; min-height: 120vh; }
+  section[role="banner"] { position: sticky; bottom: 0; padding: 24px 32px; background: #fff; box-shadow: 0 -2px 12px rgba(0, 0, 0, .2); }
+  section h2 { text-align: center; margin: 0 0 12px; }
+  .x { position: absolute; top: 20px; right: 32px; border: 0; background: none; font-size: 22px; cursor: pointer; }
+  footer { display: flex; justify-content: flex-end; gap: 12px; align-items: center; }
+  footer .link { border: 0; background: none; text-decoration: underline; cursor: pointer; }
+  footer .primary { border: 0; border-radius: 16px; padding: 8px 16px; background: #0053e2; color: #fff; font-weight: 700; cursor: pointer; }
+</style>
+<div class="page">
+  <div class="shop">
+    <input type="search" placeholder="Search everything">
+    <h1>Sticky bottom sheet</h1>
+    <p>A shop page with a search box and a sticky consent sheet whose only buttons are
+      "Manage cookie settings" and "Close". The monster should eat "Close".</p>
+  </div>
+  <section role="banner">
+    <button class="x" aria-label="Close dialog" onclick="answer('closed')">✕</button>
+    <h2>Your data, your choice</h2>
+    <p>We want your shopping experience with us to be as easy and relevant as possible. For this purpose, we and
+      trusted third parties may use cookies and similar tracking technologies. You can change your cookie
+      settings any time.</p>
+    <footer>
+      <button class="link" onclick="answer('settings')">Manage cookie settings</button>
+      <button class="primary" onclick="answer('closed')">Close</button>
+    </footer>
+  </section>
+</div>
+<script>
+  function answer(result) {
+    document.title = result;
+    document.querySelector('section[role="banner"]').remove();
+  }
+</script>
+</html>

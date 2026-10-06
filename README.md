@@ -53,7 +53,7 @@ To try the monster on sample pages:
 cd test/fixtures && python3 -m http.server 8765
 ```
 
-Then open `http://localhost:8765/` and pick a page. The five `banner-*` pages
+Then open `http://localhost:8765/` and pick a page. The six `banner-*` pages
 should get eaten; the other pages (no banner, a cookie recipe, a login dialog,
 a newsletter modal) should be left alone.
 
