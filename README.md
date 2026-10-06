@@ -34,6 +34,8 @@ without the show.
   apart from banners.
 - If you click inside the banner during the show, the monster backs off and
   nothing is accepted.
+- When a banner has no accept button, the monster eats its close (✕) button
+  instead. On most such banners closing means accepting the defaults.
 - It only ever accepts. It does not reject cookies or choose options.
 - In a background tab the show waits until you look at the tab.
 
@@ -51,7 +53,7 @@ To try the monster on sample pages:
 cd test/fixtures && python3 -m http.server 8765
 ```
 
-Then open `http://localhost:8765/` and pick a page. The four `banner-*` pages
+Then open `http://localhost:8765/` and pick a page. The five `banner-*` pages
 should get eaten; the other pages (no banner, a cookie recipe, a login dialog,
 a newsletter modal) should be left alone.
 

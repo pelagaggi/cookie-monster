@@ -33,7 +33,12 @@
 
   // Short acknowledgements are too common inside other words ("ok" in
   // "cookies"), so they must be the whole label.
-  const ACKNOWLEDGE_LABELS = ['got it', 'ok', 'okay', 'i understand', 'entendi', 'continue'];
+  const ACKNOWLEDGE_LABELS = [
+    'got it', 'ok', 'okay', 'i understand', 'entendi', 'continue',
+    // Some banners have no accept button and treat closing as acceptance.
+    'close', 'close dialog', 'close banner', 'dismiss', 'x', 'fechar', 'cerrar', 'fermer', 'schließen',
+  ];
+  const CLOSE_SYMBOLS = ['×', '✕', '✖'];
 
   function normalize(text) {
     return String(text || '')
@@ -76,6 +81,7 @@
     if (includesAny(label, REJECT_PATTERNS)) return 0;
     if (ACCEPT_ALL.test(label)) return 3;
     if (ACCEPT.test(label)) return 2;
+    if (CLOSE_SYMBOLS.includes(label)) return 1;
     const bare = label.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '');
     return ACKNOWLEDGE_LABELS.includes(bare) ? 1 : 0;
   }

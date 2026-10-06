@@ -22,12 +22,12 @@
   }
 
   function labelOf(el) {
-    return el.innerText || el.value || el.getAttribute('aria-label') || '';
+    return (el.innerText || '').trim() || el.value || el.getAttribute('aria-label') || el.title || '';
   }
 
   // Same as labelOf but without forcing layout, to rule most elements out cheaply.
   function roughLabelOf(el) {
-    return el.textContent || el.value || el.getAttribute('aria-label') || '';
+    return (el.textContent || '').trim() || el.value || el.getAttribute('aria-label') || el.title || '';
   }
 
   function isVisible(el) {

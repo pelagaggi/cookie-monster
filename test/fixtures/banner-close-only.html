@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>close-only banner</title>
+<style>
+  body { font: 16px/1.5 system-ui, sans-serif; margin: 40px; }
+  .banner { position: fixed; left: 16px; bottom: 16px; width: 380px; padding: 20px; background: #e3f2fd; border: 1px solid #1565c0; border-radius: 10px; }
+  .banner button { padding: 8px 14px; border: 0; border-radius: 16px; font: inherit; cursor: pointer; }
+  .banner .close { position: absolute; top: 8px; right: 8px; background: none; }
+</style>
+<h1>Banner with no accept button</h1>
+<p>Closing the banner accepts. The monster should eat the ✕.</p>
+<div class="banner">
+  <button class="close" aria-label="Close" onclick="answer('closed')">
+    <svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 1l12 12M13 1L1 13" stroke="#000" stroke-width="2"/></svg>
+  </button>
+  <p>By continuing to use this website, you agree we can store cookies on your device in accordance with our
+    <a href="#">Cookie Policy</a>. By exiting this window, default cookies will be accepted.</p>
+  <button onclick="answer('rejected')">Necessary cookies only</button>
+  <button onclick="answer('settings')">Customize settings</button>
+</div>
+<script>
+  function answer(result) {
+    document.title = result;
+    document.querySelector(".banner").remove();
+  }
+</script>
+</html>

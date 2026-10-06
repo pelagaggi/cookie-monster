@@ -84,3 +84,11 @@ test('mentionsCookies is true only for cookie wording', () => {
   assert.equal(m.mentionsCookies('We use COOKIES on this site'), true);
   assert.equal(m.mentionsCookies('I consent to receive marketing emails'), false);
 });
+
+test('close buttons score as an acknowledgement', () => {
+  for (const label of ['Close', 'Dismiss', '×', '✕', 'X', 'Fechar', 'Close dialog']) {
+    assert.equal(m.scoreLabel(label), 1, label);
+  }
+  assert.equal(m.scoreLabel('Close account'), 0);
+  assert.equal(m.scoreLabel('Accept and close'), 2);
+});

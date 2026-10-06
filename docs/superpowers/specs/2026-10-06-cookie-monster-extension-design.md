@@ -96,6 +96,9 @@ Rules added after code review, to stop misfires on ordinary pages:
   `not `, `later`, `selected`, `sans`, `não`, `no `, `sin `, `nicht`, `ohne`,
   `nur`, `notwendig`, `auswahl`) and anything transactional (`pay`, `buy`,
   `order`, `purchase`, `checkout`, `subscribe`, `sign`, `log in`, `login`).
+- Close buttons (`close`, `dismiss`, `x`, `×`, `fechar`, `cerrar`, `fermer`,
+  `schließen`, read from text, `aria-label` or `title`) count as tier 1, for
+  banners that have no accept button and treat closing as acceptance.
 - A tier-1 label is only trusted when the banner text contains `cookie`.
 - A container holding a text-entry field (text, email, password, tel, number,
   search, textarea, select) is a form, not a banner.
