@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>shadow banner</title>
+<h1>Shadow DOM banner</h1>
+<p>The banner lives inside an open shadow root.</p>
+<div id="host"></div>
+<script>
+  function answer(result) {
+    document.title = result;
+    (document.querySelector(".banner") || document.querySelector("#host")).remove();
+  }
+</script>
+<script>
+  const shadow = document.getElementById('host').attachShadow({ mode: 'open' });
+  shadow.innerHTML = `
+    <style>
+      .box { position: fixed; right: 24px; bottom: 24px; width: 320px; padding: 16px; background: #fff; border: 1px solid #ccc; border-radius: 8px; font: 15px system-ui, sans-serif; }
+      button { padding: 8px 14px; margin: 8px 8px 0 0; }
+    </style>
+    <div class="box">
+      We value your privacy and use cookies. Do you consent?
+      <div>
+        <button id="no">Manage options</button>
+        <button id="yes">Allow all</button>
+      </div>
+    </div>`;
+  shadow.getElementById('no').onclick = () => answer('rejected');
+  shadow.getElementById('yes').onclick = () => answer('accepted');
+</script>
+</html>

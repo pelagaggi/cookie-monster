@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>basic banner</title>
+<style>
+  body { font: 16px/1.5 system-ui, sans-serif; margin: 40px; }
+  .banner { position: fixed; left: 0; right: 0; bottom: 0; padding: 16px 24px; background: #222; color: #fff; display: flex; gap: 12px; align-items: center; }
+  .banner p { flex: 1; margin: 0; }
+  .banner button { padding: 10px 18px; border: 0; border-radius: 6px; font: inherit; cursor: pointer; }
+  .banner .accept { background: #2ecc71; color: #fff; }
+</style>
+<h1>Basic banner</h1>
+<p>A fixed bottom banner. The monster should eat "Accept all".</p>
+<div class="banner">
+  <p>We use cookies to improve your experience.</p>
+  <button onclick="answer('rejected')">Reject all</button>
+  <button onclick="answer('settings')">Cookie settings</button>
+  <button class="accept" onclick="answer('accepted')">Accept all</button>
+</div>
+<script>
+  function answer(result) {
+    document.title = result;
+    (document.querySelector(".banner") || document.querySelector("#host")).remove();
+  }
+</script>
+</html>
