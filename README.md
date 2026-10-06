@@ -3,6 +3,8 @@
 A Chrome extension. When a cookie banner shows up, a hungry blue monster
 charges onto the screen, eats the accept button, and accepts for you.
 
+![The monster eating an "Accept all" button](docs/demo.png)
+
 ## Install
 
 1. Open `chrome://extensions`.
