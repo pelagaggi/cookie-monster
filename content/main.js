@@ -4,16 +4,8 @@
 
   const { detector, monster } = root.CookieMonster;
 
-  function requestSound() {
-    try {
-      chrome.runtime.sendMessage({ type: 'nom' }).catch(() => {});
-    } catch {
-      // The extension was reloaded under this page; sound is optional.
-    }
-  }
-
   try {
-    const { enabled, sound } = await chrome.storage.sync.get({ enabled: true, sound: true });
+    const { enabled } = await chrome.storage.sync.get({ enabled: true });
     if (!enabled) return;
 
     detector.watch(async (hit) => {
@@ -23,10 +15,7 @@
           button.click();
           return;
         }
-        await monster.play(hit, {
-          onEatStart: () => sound && requestSound(),
-          onFinish: () => button.click(),
-        });
+        await monster.play(hit, { onFinish: () => button.click() });
       } catch (error) {
         console.warn('Cookie Monster: show failed', error);
       }

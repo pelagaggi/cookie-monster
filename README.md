@@ -9,8 +9,8 @@ charges onto the screen, eats the accept button, and accepts for you.
 2. Turn on **Developer mode** (top right).
 3. Click **Load unpacked** and pick this folder.
 
-The toolbar popup has two toggles: one turns the monster off, the other mutes
-his sounds. Changes apply to pages you load next.
+The toolbar popup has a toggle that turns the monster off. Changes apply to
+pages you load next.
 
 ## How it works
 
@@ -20,8 +20,6 @@ his sounds. Changes apply to pages you load next.
   (fixed, sticky, high z-index, or a dialog) that mentions cookies or consent.
   It watches the page for 15 seconds and acts at most once per page load.
 - `content/monster.js` plays the show and `content/main.js` clicks the button.
-- `background.js` speaks through Chrome's text-to-speech and `offscreen.js`
-  synthesizes the crunches.
 
 With "reduce motion" turned on in your system settings, the button is clicked
 without the show.
@@ -59,6 +57,6 @@ a newsletter modal) should be left alone.
 
 ## Changing the character
 
-The monster's art, name, and voice line live in `content/character.js`. To
+The monster's art, name, and catchphrases live in `content/character.js`. To
 publish this extension, replace them with an original character and change the
 `name` in `manifest.json`: Cookie Monster belongs to Sesame Workshop.

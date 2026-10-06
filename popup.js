@@ -1,4 +1,4 @@
-const DEFAULTS = { enabled: true, sound: true };
+const DEFAULTS = { enabled: true };
 
 chrome.storage.sync.get(DEFAULTS).then((settings) => {
   for (const key of Object.keys(DEFAULTS)) {

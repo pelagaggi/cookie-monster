@@ -199,7 +199,6 @@
       if (!stillOurs()) return false;
 
       monster.classList.add('eating');
-      hooks.onEatStart();
       const background = getComputedStyle(button).backgroundColor;
       const buttonColor = /^(transparent|rgba\(0, 0, 0, 0\))$/.test(background) ? COOKIE_BROWN : background;
       const bites = [];

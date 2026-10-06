@@ -1,5 +1,10 @@
 # Cookie Monster Chrome Extension — Design
 
+> Update: sound was removed at the user's request after the first build. The
+> extension is silent; there is no service worker, offscreen document, or
+> sound setting, and the only permission is `storage`. Sections below that
+> describe sound are historical.
+
 Date: 2026-10-06
 
 ## Purpose

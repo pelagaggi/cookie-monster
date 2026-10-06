@@ -1,4 +1,4 @@
-// The monster's look and voice. To ship a different character (for example
+// The monster's look and catchphrases. To ship a different character (for example
 // an original one for the Chrome Web Store), change only this file. Keep the
 // cm-* classes and the 200x220 viewBox: monster.js animates them.
 (function (root) {
@@ -21,7 +21,6 @@
 
   root.CookieMonster.character = {
     name: 'Cookie Monster',
-    speech: 'Om nom nom nom! Cookie!',
     shouts: ['OM', 'NOM', 'NOM!', 'COOKIE!'],
     svg,
   };
